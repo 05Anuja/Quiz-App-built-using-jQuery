@@ -6,24 +6,28 @@ const questions = [
       "High Text Machine Language",
       "Hyper Tabular Markup Language",
     ],
+    correctAnswer: "Hyper Text Markup Language"
   },
   {
     question: "What does CSS stands for?",
     options: [
       "Hyper Text Markup Language",
       "High Text Machine Language",
-      "Hyper Tabular Markup Language",
+      "Cascading Style Sheet",
     ],
+    correctAnswer: "Cascading Style Sheet"
   },
   {
     question: "What does JS stands for?",
     options: [
-      "Hyper Text Markup Language",
-      "High Text Machine Language",
-      "Hyper Tabular Markup Language",
+      "JavaScript",
+      "Java Structure",
+      "Just Style",
     ],
+    correctAnswer: "JavaScript"
   },
 ];
+
 
 $(document).ready(function () {
     let currQue = 0;
