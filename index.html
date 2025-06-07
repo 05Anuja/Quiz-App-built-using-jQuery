@@ -7,24 +7,29 @@
     <title>Quiz App using jQuery</title>
   </head>
   <body>
-
     <div class="container">
       <h1 id="title">quiz app</h1>
-      <p id="description">A quiz application that focused on HTML, CSS, and JS topics</p>
+      <p id="description">
+        A quiz application that focused on HTML, CSS, and JS topics
+      </p>
       <button id="startBtn">start the quiz</button>
     </div>
 
-    <div id="quizBox" style="display: none;">
-        <div id="questionContainer">
-            <h2 id="questionText"></h2>
-            <div id="optionsContainer"></div>
-        </div>
-        <div id="navigation">
-            <button id="prevBtn">Previous</button>
-            <button id="nextBtn">Next</button>
-        </div>
+    <div id="quizBox" style="display: none">
+      <div id="questionContainer">
+        <h2 id="questionText"></h2>
+        <div id="optionsContainer"></div>
+      </div>
+      <div id="navigation">
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+      </div>
     </div>
-    
+
+    <div id="resultsContainer">
+      <div id="resultContent"></div>
+      <!-- <button id="restartBtn">Restart the Quiz</button> -->
+    </div>
   </body>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
