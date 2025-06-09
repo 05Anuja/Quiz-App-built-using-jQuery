@@ -162,7 +162,24 @@ $(document).ready(function () {
       `;
     });
 
+    const percentage = (correct / questions.length) * 100;
+    let remark = "";
+
+    if (percentage === 100) {
+      remark = "🌟 Perfect!";
+    } else if (percentage >= 80) {
+      remark = "🎉 Excellent!";
+    } else if (percentage >= 60) {
+      remark = "👍 Good job!";
+    } else if (percentage >= 40) {
+      remark = "🙂 Keep practicing!";
+    } else {
+      remark = "😟 Needs practice!";
+    }
+
     resultHTML += `</ul><h3>Total Score: ${correct} / ${questions.length}</h3>`;
+    resultHTML += `<h3 style="color: #388E3C;">Percentage: ${percentage.toFixed(2)}% ${remark}</h3>`
+    // resultHTML += `<h3>Remark: ${remark}</h3>`
     clearInterval(timerId);
     resultHTML += `<h3 style="color: #fd7e14;">Time Taken: ${getFormatedTimer()}</h3>`
     resultHTML += `<button id="restartBtn">Restart the Quiz</button>`;
