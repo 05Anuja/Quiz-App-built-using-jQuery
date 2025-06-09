@@ -1,67 +1,101 @@
 const questions = [
   {
-    question: "What does HTML stand for?",
+    question: "What will be the output of: typeof NaN in JavaScript?",
+    options: ["'number'", "'NaN'", "'undefined'"],
+    correctAnswer: "'number'",
+  },
+  {
+    question: "Which CSS rule has the highest specificity?",
     options: [
-      "Hyper Text Markup Language",
-      "High Text Machine Language",
-      "Hyper Tabular Markup Language",
+      "Element selector",
+      "Class selector",
+      "ID selector"
     ],
-    correctAnswer: "Hyper Text Markup Language",
+    correctAnswer: "ID selector",
   },
   {
-    question: "What does CSS stand for?",
+    question: "Which method converts a JSON string into a JavaScript object?",
+    options: ["JSON.stringify()", "JSON.parse()", "JSON.objectify()"],
+    correctAnswer: "JSON.parse()",
+  },
+  {
+    question: "In JavaScript, which keyword is used to prevent further modification of an object?",
+    options: ["freeze()", "seal()", "lock()"],
+    correctAnswer: "freeze()",
+  },
+  {
+    question: "What is the z-index in CSS used for?",
     options: [
-      "Computer Style Sheet",
-      "Cascading Style Sheet",
-      "Creative Style Setup",
+      "To change text size",
+      "To control stacking order of elements",
+      "To align elements horizontally"
     ],
-    correctAnswer: "Cascading Style Sheet",
+    correctAnswer: "To control stacking order of elements",
   },
   {
-    question: "Which HTML attribute is used to define inline styles?",
-    options: ["class", "style", "font"],
-    correctAnswer: "style",
+    question: "Which statement is true about JavaScript hoisting?",
+    options: [
+      "Only functions are hoisted",
+      "Variables and functions are hoisted",
+      "Variables declared with let are hoisted"
+    ],
+    correctAnswer: "Variables and functions are hoisted",
   },
   {
-    question: "Which CSS property controls the text size?",
-    options: ["font-style", "text-size", "font-size"],
-    correctAnswer: "font-size",
+    question: "Which of the following is a feature of `localStorage` in web browsers?",
+    options: [
+      "Stores data until the session ends",
+      "Stores data permanently until explicitly cleared",
+      "Stores only string data temporarily"
+    ],
+    correctAnswer: "Stores data permanently until explicitly cleared",
   },
   {
-    question: "Inside which HTML element do we put the JavaScript code?",
-    options: ["<javascript>", "<script>", "<js>"],
-    correctAnswer: "<script>",
+    question: "What does the CSS 'box-sizing: border-box' do?",
+    options: [
+      "Adds padding and border to the total width/height",
+      "Excludes padding from element's size",
+      "Makes content overflow hidden"
+    ],
+    correctAnswer: "Adds padding and border to the total width/height",
   },
   {
-    question: "What does JS stand for?",
-    options: ["JavaScript", "Java Structure", "Just Style"],
-    correctAnswer: "JavaScript",
+    question: "Which function is used to delay execution in JavaScript?",
+    options: ["setTimeout()", "delay()", "pause()"],
+    correctAnswer: "setTimeout()",
   },
   {
-    question: "Which symbol is used for single-line comments in JavaScript?",
-    options: ["<!-- -->", "//", "**"],
-    correctAnswer: "//",
-  },
-  {
-    question: "Which event occurs when the user clicks on an HTML element?",
-    options: ["onchange", "onmouseclick", "onclick"],
-    correctAnswer: "onclick",
-  },
-  {
-    question: "How do you declare a JavaScript variable?",
-    options: ["v myVar;", "variable myVar;", "let myVar;"],
-    correctAnswer: "let myVar;",
-  },
-  {
-    question: "Which function is used to print something in the console?",
-    options: ["console.print()", "log.console()", "console.log()"],
-    correctAnswer: "console.log()",
-  },
+    question: "In the DOM, what does 'event bubbling' mean?",
+    options: [
+      "Event moves from target to root",
+      "Event moves from root to target",
+      "Event only triggers on parent"
+    ],
+    correctAnswer: "Event moves from target to root",
+  }
 ];
 
 $(document).ready(function () {
   let currQue = 0;
   let userAns = new Array(questions.length).fill(null);
+  let seconds = 0, minutes = 0, timerId = null;
+
+  $("#timer").text(`00 : 00`);
+
+  function startTimer () {
+    seconds ++;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes += 1;
+    }
+    $("#timer").text(getFormatedTimer());
+  }
+
+  function getFormatedTimer () {
+    let secondsString = seconds < 10 ? `0${seconds}` : seconds;
+    let minutesString = minutes < 10 ? `0${minutes}` : minutes;
+    return `${minutesString} : ${secondsString}`
+  }
 
   function escapeHTML(str) {
     return str
@@ -129,6 +163,8 @@ $(document).ready(function () {
     });
 
     resultHTML += `</ul><h3>Total Score: ${correct} / ${questions.length}</h3>`;
+    clearInterval(timerId);
+    resultHTML += `<h3 style="color: #fd7e14;">Time Taken: ${getFormatedTimer()}</h3>`
     resultHTML += `<button id="restartBtn">Restart the Quiz</button>`;
 
     $("#questionContainer").hide();
@@ -140,6 +176,10 @@ $(document).ready(function () {
   $("#startBtn").click(function () {
     $(".container").hide();
     showQues(currQue);
+    if (timerId !== null) {
+      clearInterval(timerId);
+    }
+    timerId = setInterval(startTimer, 1000);
   });
 
   // Next/Submit button
@@ -149,6 +189,7 @@ $(document).ready(function () {
       showQues(currQue);
     } else {
       showResults();
+      clearInterval(timerId);
     }
   });
 
